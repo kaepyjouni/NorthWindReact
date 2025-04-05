@@ -1,24 +1,111 @@
-#root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
+body {
+  padding: auto;
+  display: block;
+  background-color: red;
+}
+
+.ylapalkki {
+  text-align: center;
+  justify-content: center;
+  width: 100%;
+  padding: auto;
+  background-color: aqua;
+}
+
+.navbar-nav {
+  display: flex;
+  justify-content: center;
+  gap: 20px; /* väli linkkien väliin, valinnainen */
+  padding: 10px;
+}
+
+.nav-link {
   text-align: center;
 }
 
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
+
+.App {
+  margin: auto;
+  text-align: center;
+  width: max-content;
 }
 
-@keyframes logo-spin {
+#userTable {
+  margin: auto;
+}
+
+.message {
+  background: lightgrey;
+  font-size: 36px;
+  font-weight: bold;
+  border: 3px solid;
+  border-radius: 5px;
+  padding: 10px;
+  margin: 10% auto 10px auto;
+  width: 70%;
+}
+
+.message.neg {
+  color: red;
+}
+
+.message.pos {
+  color: green;
+}
+
+.customerDetails {
+  background-color: chocolate;
+  border: solid;
+  width: 80%;
+  max-width: 800px;
+  margin: 0 auto 50px auto;
+  border-radius: 30px;
+  padding: 0 10%;
+}
+
+.posts {
+  margin: 0 auto 2% auto;
+  background-color: aqua;
+  max-width: 70%;
+  border-radius: 20px;
+  border: 1px solid blueviolet;
+}
+
+.nappi {
+  border-radius: 10px;
+  margin-left: 10px;
+  font-size: 26px;
+  background-color: chocolate;
+  color: white;
+}
+
+.App-logo {
+  height: 40vmin;
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .App-logo {
+    animation: App-logo-spin infinite 20s linear;
+  }
+}
+
+.App-header {
+  background-color: #054ddb;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.App-link {
+  color: #61dafb;
+}
+
+@keyframes App-logo-spin {
   from {
     transform: rotate(0deg);
   }
@@ -27,75 +114,7 @@
   }
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
-  }
-}
-
-.card {
-  padding: 2em;
-}
-
-.read-the-docs {
-  color: #888;
-}
-
-.posts{
-  margin: auto;
-  background-color: rgb(14, 26, 22);
-  max-width: 70%;
-  border-radius: 20px;
-  border-width: 1px;
-  border-style: solid;
-  border-color: aqua;
-  margin-bottom: 2%;
-}
-
-.customerDetails{
-  background-color: chocolate;
-  border-style: solid;
-  width: 100%;
-  margin: auto;
-  margin-bottom: 50px;
-  border-radius: 30px;
-
-}
-
-.nappi {
-  border-radius: 10px;
-  margin-left: 10px;
-  font-size: 16px;
-  background-color: crimson;
-  color: antiquewhite;
-}
-
-.neg {
-  color: red;
-  background: lightgrey;
-  font-size: 36px;
-  font-weight: bold;
-  border-style: solid;
-  border-width: 3px;
-  border-radius: 5px;
-  padding: 10px;
-  margin-bottom: 10px;
-  margin-top: 10%;
-  width: 70%;
-  margin-left: 15%;
-}
-
-.pos {
-  color: green;
-  background: lightgrey;
-  font-size: 36px;
-  font-weight: bold;
-  border-style: solid;
-  border-width: 3px;
-  border-radius: 5px;
-  padding: 10px;
-  margin-bottom: 10px;
-  margin-top: 10%;
-  width: 70%;
-  margin-left: 15%;
+.editlabel {
+  color: rgb(30, 161, 236);
+  padding: 120px;
 }

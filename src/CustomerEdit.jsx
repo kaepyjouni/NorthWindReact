@@ -69,43 +69,74 @@ const handleSubmit = (event) => {
 
        <form onSubmit={handleSubmit}>
        <div>
+                <label className="editlabel">ID </label>
+                <div>
                 <input type="text" value={newCustomerId} disabled />
+                </div>
             </div>
+            <div>
+            <label className="editlabel">Company Name </label>
             <div>
                 <input type="text" value={newCompanyName} placeholder="Company name"
                     onChange={({ target }) => setNewCompanyName(target.value)} required />
+                    </div>
             </div>
+            <div>
+            <label className="editlabel">Contact Name </label>
             <div>
                 <input type="text" value={newContactName} placeholder="Contact name"
                     onChange={({ target }) => setNewContactName(target.value)} />
+                    </div>
             </div>
+            <div>
+            <label className="editlabel">Contact Title </label>
             <div>
                 <input type="text" value={newContactTitle} placeholder="Contact title"
                     onChange={({ target }) => setNewContactTitle(target.value)} />
+                    </div>
             </div>
+            <div>
+            <label className="editlabel">Country </label>
             <div>
                 <input type="text" value={newCountry} placeholder="Country"
                     onChange={({ target }) => setNewCountry(target.value)} />
+                    </div>
             </div>
+            <div>
+            <label className="editlabel">Company Address </label>
             <div>
                 <input type="text" value={newAddress} placeholder="Address"
                     onChange={({ target }) => setNewAddress(target.value)} />
+                    </div>
             </div>
+            <div>
+            <label className="editlabel">Company City </label>
             <div>
                 <input type="text" value={newCity} placeholder="City"
                     onChange={({ target }) => setNewCity(target.value)} />
+                    </div>
             </div>
+            <div>
+            <label className="editlabel">PostalCode </label>
             <div>
                 <input type="text" value={newPostalCode} placeholder="Postal code"
                     onChange={({ target }) => setNewPostalCode(target.value)} />
+                    </div>
             </div>
+            <div>
+              
+            <label className="editlabel">Company Phone </label>
             <div>
                 <input type="text" value={newPhone} placeholder="Phone"
                     onChange={({ target }) => setNewPhone(target.value)} />
+                    </div>
             </div>
+            <div>
+            <label className="editlabel">Company Fax </label>
             <div>
                 <input type="text" value={newFax} placeholder="Fax"
                     onChange={({ target }) => setNewFax(target.value)} />
+                    </div>
             </div>
          
          <input type='submit' value='save' />

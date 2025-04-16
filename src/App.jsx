@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import './App.css'
 import Laskuri from './Laskuri'
 import Posts from './Posts'
@@ -9,6 +9,8 @@ import UserList from './UserList'
 import Navbar from 'react-bootstrap/Navbar'
 import Nav from 'react-bootstrap/Nav'
 import 'bootstrap/dist/css/bootstrap.min.css'
+import Login from './Login'
+
 
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
 
@@ -17,9 +19,30 @@ function App() {
   const [showMessage, setShowMessage] = useState(false)
   const [message, setMessage] = useState('')
   const [isPositive, setIsPositive] = useState(false)
+  const [loggedInUser, setLoggedInUser] = useState('')
 
-  return (
-    <div className="App">
+  useEffect(() => {
+    let storedUser = localStorage.getItem("username")
+    if (storedUser !== null) {
+      setLoggedInUser(storedUser)
+    }
+  },[])
+  
+  
+  // Logout napin tapahtumankäsittelijä
+  const logout = () => {
+    localStorage.clear()
+    setLoggedInUser('')
+  }
+    
+    return (
+      <div className="App">
+  
+        {!loggedInUser && <Login setMessage={setMessage} setIsPositive={setIsPositive} 
+                  setShowMessage={setShowMessage} setLoggedInUser={setLoggedInUser} />}
+  
+  { loggedInUser &&
+
       <Router>
       
           <Navbar className="ylapalkki" bg="dark" width="100%" variant="dark">
@@ -28,6 +51,7 @@ function App() {
                 <Nav.Link href='/posts'>Some higlights</Nav.Link>
                 <Nav.Link href='/users'>Users</Nav.Link>
                 <Nav.Link href='/laskuri'>Laskuri</Nav.Link>
+                <button onClick={() => logout()}>Logout</button>
             </Nav>
           </Navbar>
                         
@@ -56,8 +80,10 @@ function App() {
         
         </Routes>
       </Router>
+}
     </div>
   )
 }
+
 
 export default App

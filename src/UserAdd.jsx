@@ -14,19 +14,32 @@ const [newEmail, setNewEmail] = useState('')
 const [newAccesslevelId, setNewAccesslevelId] = useState(2)
 const [newUsername, setNewUsername] = useState('')
 const [newPassword, setNewPassword] = useState('')
+const [confirmPassword, setConfirmPassword] = useState('')
 
+const passwordsMatch = newPassword === confirmPassword
 
+{!passwordsMatch && (
+  <p style={{ color: 'red' }}>Salasanat eivät täsmää</p>
+)}
 // onSubmit tapahtumankäsittelijä funktio
 const handleSubmit = (event) => {
-      event.preventDefault()
-      var newUser = {
-        firstname: newFirstname,
-        lastname: newLastname,
-        email: newEmail,
-        accesslevelId: parseInt(newAccesslevelId),
-        username: newUsername,
-        password: md5(newPassword) // Salataan md5 kirjaston metodilla
-    }
+  event.preventDefault();
+  if (!passwordsMatch) {
+    setMessage("Salasanat eivät täsmää!");
+    setIsPositive(false);
+    setShowMessage(true);
+    setTimeout(() => setShowMessage(false), 4000);
+    return;
+  }
+
+  const newUser = {
+    firstname: newFirstname,
+    lastname: newLastname,
+    email: newEmail,
+    accesslevelId: parseInt(newAccesslevelId),
+    username: newUsername,
+    password: md5(newPassword)
+  };
     
     console.log(newUser)
 
@@ -86,6 +99,18 @@ const handleSubmit = (event) => {
                 <input type="password" value={newPassword} placeholder="Password"
                     onChange={({ target }) => setNewPassword(target.value)} />
             </div>
+            <div>
+              <input
+    type="password"
+    value={confirmPassword}
+    placeholder="Confirm Password"
+    onChange={({ target }) => setConfirmPassword(target.value)}
+    required
+  />
+</div>
+{!passwordsMatch && confirmPassword && (
+  <p style={{ color: 'red' }}>Salasanat eivät täsmää</p>
+)}
             
          <input type='submit' value='save' />
          <input type='button' value='back' onClick={() => setLisäystila(false)} />

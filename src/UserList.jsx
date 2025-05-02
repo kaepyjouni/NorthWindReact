@@ -2,6 +2,7 @@ import './App.css'
 import React, {useState, useEffect} from 'react'
 import UserService from './services/User'
 import UserAdd from './UserAdd'
+import UserEdit from './UserEdit'
 
 const UserList = ({setMessage, setIsPositive, setShowMessage}) => {
 
@@ -12,12 +13,20 @@ const [muokkaustila, setMuokkaustila] = useState(false)
 const [reload, reloadNow] = useState(false)
 const [muokattavaUser, setMuokattavaUser] = useState(false)
 const [search, setSearch] = useState("")
+const [accessLevel, setAccessLevel] = useState (null)
 
 // UseEffect ajetaan aina alussa kerran
 useEffect(() => {
 
   const token = localStorage.getItem('token')
-        UserService
+  const storedAccessLevel = localStorage.getItem('accesslevelId');// Tallenna accessLevelID tokenin yhteydessä
+   
+
+  if (storedAccessLevel) {
+    setAccessLevel(Number(storedAccessLevel));
+  }
+
+            UserService
             .setToken(token)
 
   UserService.getAll()
@@ -37,6 +46,31 @@ const editUsers = (user) => {
   setMuokkaustila(true)
 }
 
+const deleteUser = (user) => {
+    if (window.confirm('Haluatko varmasti poistaa käyttäjän?')) {
+        UserService.remove(user.userId)
+        .then(() => {
+          setIsPositive(true);
+          setMessage("Käyttäjä poistettu onnistuneesti");
+          setShowMessage(true);
+          reloadNow(!reload); // pakota uusi haku
+        })
+        .catch(error => {
+          setIsPositive(false);
+          setMessage("Poistossa tapahtui virhe");
+          setShowMessage(true);
+        });
+    }
+  };
+
+if (accessLevel === null) {
+    return <p>Ladataan käyttäjätietoja...</p>;
+  }
+
+if (accessLevel !== 2) {
+    return <p>Sinulla ei ole oikeuksia nähdä käyttäjiä. Tarkasta Kirjautumistiedot!</p>;
+  }
+
   return (
         <>
             <h1><nobr>Users</nobr>
@@ -50,6 +84,19 @@ const editUsers = (user) => {
             <input placeholder="Search by Last Name" value={search} onChange={handleSearchInputChange} />
             }
 
+{muokkaustila && (
+  <UserEdit
+    user={muokattavaUser}
+    setMuokkaustila={setMuokkaustila}
+    setIsPositive={setIsPositive}
+    setMessage={setMessage}
+    setShowMessage={setShowMessage}
+    reloadNow={reloadNow}
+  />
+)}
+
+
+            
             {!lisäystila && !muokkaustila &&
             <table id="userTable">
                 <thead>
@@ -58,11 +105,13 @@ const editUsers = (user) => {
                         <th>Lastname</th>
                         <th>Email</th>
                         <th>Accesslevel</th>
+                        <th>Actions</th>
                     </tr>
                 </thead>
                 <tbody>
 
-        
+
+                
                 {users && users.map(u =>
                 {
                     const lowerCaseName = u.lastName.toLowerCase()
@@ -73,6 +122,10 @@ const editUsers = (user) => {
                                 <td>{u.lastName}</td>
                                 <td>{u.email}</td>
                                 <td>{u.accesslevelId}</td>
+                                <td>
+                                <button onClick={() => editUsers(u)}>Edit</button>
+                                <button onClick={() => deleteUser(u.userId)}>Delete</button>
+                                </td>
                             </tr>
                             
                                 )

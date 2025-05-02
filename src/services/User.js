@@ -39,4 +39,4 @@ const update = (object) => {
     return axios.put(`${baseUrl}/${object.userId}`, object, config)
 }
 
-export default { getAll, create, remove, update, setToken }
+export default { getAll, create, remove, update, setToken}
